@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kitchen_items",
+  "info": {
+    "singularName": "kitchen-item",
+    "pluralName": "kitchen-items",
+    "displayName": "Kitchen / Item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "ordered",
+        "preparing",
+        "done",
+        "taken"
+      ],
+      "default": "ordered"
+    },
+    "accountId": {
+      "type": "string",
+      "required": true
+    },
+    "productId": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
