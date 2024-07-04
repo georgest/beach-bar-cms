@@ -821,6 +821,32 @@ export interface ApiAccountAccount extends Schema.CollectionType {
   };
 }
 
+export interface ApiBillBill extends Schema.CollectionType {
+  collectionName: 'bills';
+  info: {
+    singularName: 'bill';
+    pluralName: 'bills';
+    displayName: 'Bill';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    note: Attribute.String;
+    items: Attribute.Component<'common.items', true>;
+    status: Attribute.Enumeration<['pending', 'payed', 'completed']> &
+      Attribute.DefaultTo<'pending'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::bill.bill', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::bill.bill', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiKitchenItemKitchenItem extends Schema.CollectionType {
   collectionName: 'kitchen_items';
   info: {
@@ -836,8 +862,8 @@ export interface ApiKitchenItemKitchenItem extends Schema.CollectionType {
     name: Attribute.String & Attribute.Required;
     state: Attribute.Enumeration<['ordered', 'preparing', 'done', 'taken']> &
       Attribute.DefaultTo<'ordered'>;
-    accountId: Attribute.String & Attribute.Required;
-    productId: Attribute.String & Attribute.Required;
+    accountId: Attribute.Integer;
+    productId: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -957,6 +983,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::account.account': ApiAccountAccount;
+      'api::bill.bill': ApiBillBill;
       'api::kitchen-item.kitchen-item': ApiKitchenItemKitchenItem;
       'api::product-category.product-category': ApiProductCategoryProductCategory;
       'api::product-item.product-item': ApiProductItemProductItem;

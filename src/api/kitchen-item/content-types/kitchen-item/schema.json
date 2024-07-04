@@ -27,12 +27,10 @@
       "default": "ordered"
     },
     "accountId": {
-      "type": "string",
-      "required": true
+      "type": "integer"
     },
     "productId": {
-      "type": "string",
-      "required": true
+      "type": "integer"
     }
   }
 }
